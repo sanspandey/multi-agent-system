@@ -79,21 +79,21 @@ Built with FastAPI and Uvicorn, providing endpoints:
 
 Installation
 
-# 1. Clone this repo
+1. Clone this repo
 git clone https://github.com/yourusername/multi_agent_system.git
 cd multi_agent_system
 
-# 2. Create a virtual environment
+2. Create a virtual environment
 python -m venv env
 env\Scripts\activate  # (Windows)
 
-# 3. Install dependencies
+3. Install dependencies
 pip install -r requirements.txt
 
-# 4. Set your Gemini API key
+4. Set your Gemini API key
 set GEMINI_API_KEY=your_api_key_here
 
-# 5. Run the server
+5. Run the server
 uvicorn app.main:app --reload
 
 
@@ -139,3 +139,4 @@ frontend/
 
 Sanskar Pandey
 💼 Developer — AI, FastAPI, and Multi-Agent Systems
+
