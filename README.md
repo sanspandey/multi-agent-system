@@ -140,4 +140,9 @@ frontend/
 Sanskar Pandey
 💼 Developer — AI, FastAPI, and Multi-Agent Systems
 
+📜 License
+
+MIT License – see the LICENSE file for details.
+
+
 
