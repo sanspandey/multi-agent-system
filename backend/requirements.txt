@@ -7,4 +7,5 @@ sentence-transformers
 scikit-learn
 python-dotenv
 google-generativeai
+pytesseract
 
