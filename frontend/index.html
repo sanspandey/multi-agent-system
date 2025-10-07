@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Multi-Agent System — Demo</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f5f7;
+      margin: 0;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    h3 {
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    input[type="file"], input[type="text"], textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    pre {
+      background: #f4f6f8;
+      padding: 15px;
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      max-height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  
+  <div class="container">
+    <h2>Multi-Agent System</h2>
+
+    <div>
+      <h3>Upload PDF</h3>
+      <input id="fileinput" type="file">
+      <button onclick="uploadFile()">Upload</button>
+      <pre id="uploadRes"></pre>
+    </div>
+
+    <div>
+      <h3>Ask a Question</h3>
+      <textarea id="query" rows="3" placeholder="Enter your question here..."></textarea>
+      
+      <label for="fileIds">File IDs (auto-filled after upload):</label>
+      <input id="fileIds" type="text" placeholder="File ID will appear here">
+
+      <button onclick="askQuery()">Ask</button>
+      <pre id="resultArea"></pre>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
