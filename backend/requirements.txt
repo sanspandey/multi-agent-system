@@ -1,11 +1,4 @@
 fastapi
-uvicorn
-requests
-google-generativeai
-python-multipart
-pytesseract
-PyMuPDF
-fastapi
 uvicorn[standard]
 python-multipart
 requests
@@ -14,3 +7,4 @@ sentence-transformers
 scikit-learn
 python-dotenv
 google-generativeai
+
