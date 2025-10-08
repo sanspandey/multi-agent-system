@@ -2,7 +2,7 @@ from .pdf_rag import PDFRAGAgent
 from .web_Search import WebSearchAgent
 from .arxiv_agent import ArxivAgent
 from .decision_agent import Decisionagent
-from .answer_synthesizer import answer_synthesizer
+from .ans_synthesizer import answer_synthesizer
 
 class Controller:
     def __init__(self):
