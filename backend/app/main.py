@@ -1,22 +1,25 @@
 import os
 import uuid
 import time
-from fastapi import FastAPI, UploadFile, File, Form
-from fastapi.responses import JSONResponse
-from fastapi.middleware.cors import CORSMiddleware
 from pathlib import Path
 from dotenv import load_dotenv
-
+from fastapi import FastAPI, UploadFile, File, Form
+from fastapi.responses import JSONResponse, FileResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.agent.pdf_rag import PDFRAGAgent
 from app.agent.controller import Controller
 
 
+# ---------- SETUP ----------
 BASE_DIR = Path(__file__).resolve().parent.parent
 UPLOAD_DIR = BASE_DIR / "uploads"
+FRONTEND_DIR = BASE_DIR / "frontend"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 load_dotenv()
+
 app = FastAPI(title="Multi-Agent Controller API")
 
 app.add_middleware(
@@ -26,35 +29,47 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-
+# ---------- AGENTS ----------
 logs = []
-file_map = {}  
+file_map = {}
 pdf_agent = PDFRAGAgent()
 controller = Controller()
-controller.pdf_agent = pdf_agent  
+controller.pdf_agent = pdf_agent
 
 
+# ---------- FRONTEND ----------
+# Serve static assets (JS, CSS, etc.)
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
+
+@app.get("/", response_class=FileResponse)
+def serve_home():
+    """Serve index.html from frontend folder"""
+    index_file = FRONTEND_DIR / "index.html"
+    if index_file.exists():
+        return FileResponse(index_file)
+    return JSONResponse({"error": "Frontend not found"}, status_code=404)
+
+
+# ---------- API ROUTES ----------
 @app.post("/upload_pdf")
 async def upload_pdf(file: UploadFile = File(...)):
     try:
-        MAX_BYTES = 10 * 1024 * 1024  
+        MAX_BYTES = 10 * 1024 * 1024
         data = await file.read()
         if len(data) > MAX_BYTES:
             return JSONResponse({"error": "File too large (max 10MB)"}, status_code=400)
 
-       
         fid = f"{int(time.time())}_{uuid.uuid4().hex}_{file.filename}"
         path = UPLOAD_DIR / fid
         with open(path, "wb") as f:
             f.write(data)
 
-        
         file_map[fid] = file.filename
         print(f"DEBUG >>> ingesting {path} as {fid}")
         ingest_result = pdf_agent.ingest_pdf(str(path), fid)
         print(f"DEBUG >>> Ingest result: {ingest_result}")
 
-       
         logs.append({"event": "upload_pdf", "file_id": fid, "filename": file.filename})
         return {"status": "uploaded", "file_id": fid, "ingested": ingest_result}
 
@@ -67,16 +82,13 @@ async def upload_pdf(file: UploadFile = File(...)):
 @app.post("/ask")
 async def ask(query: str = Form(...), file_ids: str = Form(None)):
     try:
-
         fid = file_ids.split(",")[0] if file_ids else None
         filename = fid if fid else None
 
         print(f"DEBUG >>> Received query: {query}")
         print(f"DEBUG >>> Using file_id: {fid}")
 
-        
         result = controller.handle_query(query, fid, filename)
-
         logs.append({"event": "ask", "query": query, "result": result})
         return JSONResponse(result)
 
