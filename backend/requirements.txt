@@ -9,4 +9,6 @@ python-dotenv
 google-generativeai
 pytesseract
 streamlit
+python-dotenv==1.0.1
+
 
