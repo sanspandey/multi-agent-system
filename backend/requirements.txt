@@ -8,4 +8,5 @@ scikit-learn
 python-dotenv
 google-generativeai
 pytesseract
+streamlit
 
