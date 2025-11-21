@@ -7,3 +7,4 @@ sentence-transformers
 scikit-learn
 python-dotenv
 google-generativeai
+python-dotenv==1.0.1
