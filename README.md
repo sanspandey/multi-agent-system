@@ -1,45 +1,45 @@
 ﻿# 🧠 Multi-Agent System
 
- Overview
+## Overview
 
 This project is a Multi-Agent AI System that automatically decides how to handle user queries using different specialized agents.
 Each agent focuses on a specific information source — PDFs, web, or research papers (via Arxiv) — and the system intelligently combines their responses into a single, synthesized answer.
 
 Agents Involved (Short Overview)
 
-🧩 Decision Agent
+## Decision Agent
 
 Chooses which agents (PDF, Web, or Arxiv) should handle a user’s question.
 Uses the Gemini model to understand query intent.
 
-📄 PDF RAG Agent
+## PDF RAG Agent
 
 Reads and searches uploaded PDFs.
 Finds the most relevant sections using text extraction and retrieval techniques.
 
-🌐 Web Search Agent
+## Web Search Agent
 
 Collects fresh information from the internet.
 Ideal for real-time or general questions.
 
-📚 Arxiv Agent
+## Arxiv Agent
 
 Looks up academic papers from the Arxiv API.
 Provides short summaries of scientific research.
 
-🧠 Answer Synthesizer Agent
+## Answer Synthesizer Agent
 
 Merges all responses from other agents into one clear, well-written answer.
 Removes duplicates and keeps the final response human-readable.
 
-Controller (Main Brain)
+## Controller (Main Brain)
 
 The Controller connects all agents together.
 It receives the user’s query and decides which agents to call (PDF, Web, Arxiv, etc.).
 After collecting all their responses, it sends them to the Answer Synthesizer Agent to form one final clean answer.
 It works like a manager — coordinating the entire multi-agent workflow.
 
-How It Works
+### How It Works
 
 1. User uploads a PDF (optional).
 2. User asks a question in the UI.
@@ -48,7 +48,7 @@ How It Works
 5. The Answer Synthesizer merges everything into a final, clear answer.
 6. The result is displayed on the frontend.
 
-Frontend
+### Frontend
 
 A simple and elegant web interface built with:
 HTML + CSS (modern, minimal UI)
@@ -61,7 +61,7 @@ Query input box
 Auto-filled File ID
 Formatted answer + agents used display
 
-⚙️ Backend
+### Backend
 
 Built with FastAPI and Uvicorn, providing endpoints:
 /upload_pdf → Upload and process a PDF file
@@ -114,7 +114,7 @@ System Response:
 
 Large Language Model (LLM) engineering involves optimizing model architecture, fine-tuning methods, and context handling. Recent papers focus on retrieval-augmented generation, instruction-following, and multi-modal fusion.
 
-🧾 Folder Structure
+## Folder Structure
 
 backend/
  ├── app/
@@ -133,21 +133,22 @@ frontend/
  ├── index.html
  └── app.js
 
-💬 Future Enhancements
+## Future Enhancements
 
 1. Add chat-style interface
 2. Store chat history per user
 3. Integrate voice input/output
 4. Add more specialized agents (e.g., YouTube summarizer, GitHub data agent)
 
-🧑‍💻 Author
+### Author
 
 Sanskar Pandey
 💼 Developer — AI, FastAPI, and Multi-Agent Systems
 
-📜 License
+### License
 
 MIT License – see the LICENSE file for details.
+
 
 
 
